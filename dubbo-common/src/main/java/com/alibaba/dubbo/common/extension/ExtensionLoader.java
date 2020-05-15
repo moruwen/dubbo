@@ -44,6 +44,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Pattern;
 
 /**
+ * dubbo扩展类加载器
  * Load dubbo extensions
  * <ul>
  * <li>auto inject dependency extension </li>
@@ -98,10 +99,16 @@ public class ExtensionLoader<T> {
         objectFactory = (type == ExtensionFactory.class ? null : ExtensionLoader.getExtensionLoader(ExtensionFactory.class).getAdaptiveExtension());
     }
 
+    /**
+     * 该类是不是@SPI类
+     */
     private static <T> boolean withExtensionAnnotation(Class<T> type) {
         return type.isAnnotationPresent(SPI.class);
     }
 
+    /**
+     * 获取指定类的SPI类加载器
+     */
     @SuppressWarnings("unchecked")
     public static <T> ExtensionLoader<T> getExtensionLoader(Class<T> type) {
         if (type == null)
@@ -432,6 +439,9 @@ public class ExtensionLoader<T> {
         }
     }
 
+    /**
+     * 获取适合的SPI实现类
+     */
     @SuppressWarnings("unchecked")
     public T getAdaptiveExtension() {
         Object instance = cachedAdaptiveInstance.get();

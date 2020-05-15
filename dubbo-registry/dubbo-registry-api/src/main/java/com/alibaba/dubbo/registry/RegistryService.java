@@ -29,6 +29,9 @@ import java.util.List;
 public interface RegistryService {
 
     /**
+     * 注册服务
+     * 1、当URL设置了check=false时，注册失败后不报错，在后台定时重试
+     *
      * Register data, such as : provider service, consumer address, route rule, override rule and other data.
      * <p>
      * Registering is required to support the contract:<br>
@@ -43,6 +46,7 @@ public interface RegistryService {
     void register(URL url);
 
     /**
+     * 取消注册服务
      * Unregister
      * <p>
      * Unregistering is required to support the contract:<br>
@@ -54,6 +58,7 @@ public interface RegistryService {
     void unregister(URL url);
 
     /**
+     * 订阅服务
      * Subscrib to eligible registered data and automatically push when the registered data is changed.
      * <p>
      * Subscribing need to support contracts:<br>

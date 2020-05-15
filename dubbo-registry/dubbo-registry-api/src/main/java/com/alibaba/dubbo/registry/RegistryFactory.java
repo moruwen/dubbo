@@ -29,6 +29,13 @@ import com.alibaba.dubbo.common.extension.SPI;
 public interface RegistryFactory {
 
     /**
+     * 连接注册中心
+     * 1、当设置check=false时表示不检查连接，否则在连接不上时抛出异常
+     * 2、支持URL上的用户名、密码认证
+     * 3、支持备选注册中心集群地址
+     * 4、支持本地磁盘文件缓存
+     * 5、支持timeout=1000请求超时设置
+     * 6、支持seession=60000会话超时或过期设置
      * Connect to the registry
      * <p>
      * Connecting the registry needs to support the contract: <br>
